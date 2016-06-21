@@ -40,5 +40,14 @@ namespace GetOffers.Properties {
                 return ((string)(this["Password"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Demo")]
+        public string Connection {
+            get {
+                return ((string)(this["Connection"]));
+            }
+        }
     }
 }

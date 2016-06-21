@@ -10,6 +10,7 @@ using System;
 using System.Threading;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace GetOffers
 {
@@ -75,7 +76,8 @@ namespace GetOffers
                 session.subscribeSessionStatus(statusListener);
 
                 session.login(Properties.Settings.Default.UserName,
-                    Properties.Settings.Default.Password, URL, "Demo");
+                    Properties.Settings.Default.Password, URL,
+                    Properties.Settings.Default.Connection);
 
                 if (statusListener.WaitEvents() && statusListener.Connected)
                 {
@@ -83,6 +85,26 @@ namespace GetOffers
 
                     tableListener.OnOffer += (s, e) =>
                         OnOffer?.Invoke(this, new GenericArgs<Offer>(e.Item));
+
+                    // improve this plus get rid of response listener
+                    tableListener.OnOfferIds += (s, e) =>
+                    {
+                        //var request = GetSetSubscriptionStatusRequest(session, e.Item);
+
+                        //if (request == null)
+                        //    throw new Exception("Cannot create request");
+
+                        //var responseListener = new ResponseListener();
+
+                        //session.subscribeResponse(responseListener);
+
+                        //responseListener.SetRequestID(request.RequestID);
+
+                        //session.sendRequest(request);
+
+                        //if (!responseListener.WaitEvents())
+                        //    throw new Exception("Response waiting timeout expired");
+                    };
 
                     tableManager = session.getTableManager();
 
@@ -146,6 +168,33 @@ namespace GetOffers
 
                 statusListener.WaitEvents();
             }
+        }
+
+        private O2GRequest GetSetSubscriptionStatusRequest(
+            O2GSession session, Dictionary<string, string> offerIds)
+        {
+            var factory = session.getRequestFactory();
+
+            var mainValueMap = factory.createValueMap();
+
+            mainValueMap.setString(O2GRequestParamsEnum.Command, "SetSubscriptionStatus");
+
+            foreach(var instrument in offerIds.Keys)
+            {
+                var childValueMap = factory.createValueMap();
+
+                childValueMap.setString(O2GRequestParamsEnum.Command, "SetSubscriptionStatus");
+
+                var status = instrument.IsSymbol() ? "T" : "D";
+
+                childValueMap.setString(O2GRequestParamsEnum.SubscriptionStatus, status); 
+
+                childValueMap.setString(O2GRequestParamsEnum.OfferID, offerIds[instrument]);
+
+                mainValueMap.appendChild(childValueMap);
+            }
+
+            return factory.createOrderRequest(mainValueMap);
         }
     }
 }

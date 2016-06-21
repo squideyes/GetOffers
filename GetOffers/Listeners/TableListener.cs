@@ -17,6 +17,8 @@ namespace GetOffers
 
         public event EventHandler<GenericArgs<Offer>> OnOffer;
 
+        public event EventHandler<GenericArgs<Dictionary<string, string>>> OnOfferIds;
+
         public void SetSymbols(List<Symbol> symbols) =>
             symbols.ForEach(s => instruments.Add(s.ToInstrument()));
 
@@ -54,15 +56,30 @@ namespace GetOffers
 
         public void HandleOffers(O2GOffersTable offers)
         {
-            O2GOfferTableRow offerRow = null;
+            var offerIds = new Dictionary<string, string>();
+
+            var rows = new List<O2GOfferTableRow>();
+
+            O2GOfferTableRow row = null;
 
             var iterator = new O2GTableIterator();
 
-            while (offers.getNextRow(iterator, out offerRow))
-                HandleOffer(offerRow);
+            while (offers.getNextRow(iterator, out row))
+            {
+                rows.Add(row);
+
+                offerIds.Add(row.Instrument, row.OfferID);
+            }
+
+            OnOfferIds?.Invoke(this,
+                new GenericArgs<Dictionary<string, string>>(offerIds));
+
+            rows.ForEach(r => RaiseOnOfferIfValid(r));
         }
 
-        public void HandleOffer(O2GOfferTableRow row)
+        public void HandleOffer(O2GOfferTableRow row) => RaiseOnOfferIfValid(row);
+
+        private void RaiseOnOfferIfValid(O2GOfferTableRow row)
         {
             if (!instruments.Contains(row.Instrument))
                 return;

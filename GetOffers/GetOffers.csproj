@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consts\WellKnown.cs" />
+    <Compile Include="Enums\Connection.cs" />
     <Compile Include="Enums\Status.cs" />
     <Compile Include="Enums\Symbol.cs" />
     <Compile Include="EventArgs\GenericArgs.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Extenders\StringExtenders.cs" />
     <Compile Include="Extenders\SymbolExtenders.cs" />
     <Compile Include="Helpers\OfferClient.cs" />
+    <Compile Include="Listeners\ResponseListener.cs" />
     <Compile Include="Primatives\Offer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
