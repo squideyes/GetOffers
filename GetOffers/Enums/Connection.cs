@@ -5,7 +5,7 @@
 // Written by Louis S. Berman <louis@squideyes.com>, 6/21/2016
 #endregion  
 
-namespace GetOffers.Enums
+namespace GetOffers
 {
     public enum Connection
     {

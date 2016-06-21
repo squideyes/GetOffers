@@ -23,6 +23,7 @@ namespace GetOffers
 
         private string userName;
         private string password;
+        private Connection connection;
 
         public event EventHandler<GenericArgs<Status>> OnStatus;
         public event EventHandler<GenericArgs<Offer>> OnOffer;
@@ -30,7 +31,7 @@ namespace GetOffers
         public event EventHandler OnCancelled;
         public event EventHandler OnDisconnected;
 
-        public OfferClient(string userName, string password)
+        public OfferClient(string userName, string password, Connection connection)
         {
             if (string.IsNullOrWhiteSpace(userName))
                 throw new ArgumentNullException(nameof(userName));
@@ -38,8 +39,12 @@ namespace GetOffers
             if (string.IsNullOrWhiteSpace(password))
                 throw new ArgumentNullException(nameof(password));
 
+            if (!Enum.IsDefined(typeof(Connection), connection))
+                throw new ArgumentOutOfRangeException(nameof(connection));
+
             this.userName = userName;
             this.password = password;
+            this.connection = connection;
         }
 
         public void Start() => Task.Factory.StartNew(() => DoWork());
@@ -75,9 +80,7 @@ namespace GetOffers
 
                 session.subscribeSessionStatus(statusListener);
 
-                session.login(Properties.Settings.Default.UserName,
-                    Properties.Settings.Default.Password, URL,
-                    Properties.Settings.Default.Connection);
+                session.login(userName, password, URL, connection.ToString());
 
                 if (statusListener.WaitEvents() && statusListener.Connected)
                 {
@@ -179,7 +182,7 @@ namespace GetOffers
 
             mainValueMap.setString(O2GRequestParamsEnum.Command, "SetSubscriptionStatus");
 
-            foreach(var instrument in offerIds.Keys)
+            foreach (var instrument in offerIds.Keys)
             {
                 var childValueMap = factory.createValueMap();
 
@@ -187,7 +190,7 @@ namespace GetOffers
 
                 var status = instrument.IsSymbol() ? "T" : "D";
 
-                childValueMap.setString(O2GRequestParamsEnum.SubscriptionStatus, status); 
+                childValueMap.setString(O2GRequestParamsEnum.SubscriptionStatus, status);
 
                 childValueMap.setString(O2GRequestParamsEnum.OfferID, offerIds[instrument]);
 

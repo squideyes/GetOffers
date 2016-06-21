@@ -22,7 +22,8 @@ namespace GetOffers
 
             var client = new OfferClient(
                 Properties.Settings.Default.UserName,
-                Properties.Settings.Default.Password);
+                Properties.Settings.Default.Password,
+                Properties.Settings.Default.Connection.ToEnum<Connection>());
 
             client.OnDisconnected += (s, e) =>
             {

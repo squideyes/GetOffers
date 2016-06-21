@@ -11,5 +11,8 @@
     <Setting Name="Connection" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Demo</Value>
     </Setting>
+    <Setting Name="TestingMode" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
