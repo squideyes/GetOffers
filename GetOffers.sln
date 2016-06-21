@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetOffers", "GetOffers\GetOffers.csproj", "{49DE4865-5D2F-4E66-82AC-1BCB52608BA0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ForexConnect", "ForexConnect", "{F913571F-59EA-4FF1-9133-F9A3A28A9E01}"
+	ProjectSection(SolutionItems) = preProject
+		ForexConnect\ForexConnectAPINET.chm = ForexConnect\ForexConnectAPINET.chm
+		ForexConnect\fxcore2.dll = ForexConnect\fxcore2.dll
+		ForexConnect\Original ForexConnect License.txt = ForexConnect\Original ForexConnect License.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DLLs", "DLLs", "{D6D62E6E-9BA9-484A-AE9D-4966269B0069}"
+	ProjectSection(SolutionItems) = preProject
+		ForexConnect\DLLs\ForexConnect.dll = ForexConnect\DLLs\ForexConnect.dll
+		ForexConnect\DLLs\fxmsg.dll = ForexConnect\DLLs\fxmsg.dll
+		ForexConnect\DLLs\fxtp.dll = ForexConnect\DLLs\fxtp.dll
+		ForexConnect\DLLs\gsexpat.dll = ForexConnect\DLLs\gsexpat.dll
+		ForexConnect\DLLs\gstool3.dll = ForexConnect\DLLs\gstool3.dll
+		ForexConnect\DLLs\gszlib.dll = ForexConnect\DLLs\gszlib.dll
+		ForexConnect\DLLs\httplib.dll = ForexConnect\DLLs\httplib.dll
+		ForexConnect\DLLs\log4cplus.dll = ForexConnect\DLLs\log4cplus.dll
+		ForexConnect\DLLs\msvcp80.dll = ForexConnect\DLLs\msvcp80.dll
+		ForexConnect\DLLs\msvcr80.dll = ForexConnect\DLLs\msvcr80.dll
+		ForexConnect\DLLs\pdas.dll = ForexConnect\DLLs\pdas.dll
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{49DE4865-5D2F-4E66-82AC-1BCB52608BA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49DE4865-5D2F-4E66-82AC-1BCB52608BA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49DE4865-5D2F-4E66-82AC-1BCB52608BA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49DE4865-5D2F-4E66-82AC-1BCB52608BA0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D6D62E6E-9BA9-484A-AE9D-4966269B0069} = {F913571F-59EA-4FF1-9133-F9A3A28A9E01}
+	EndGlobalSection
+EndGlobal
