@@ -24,6 +24,7 @@ namespace GetOffers
         private string userName;
         private string password;
         private Connection connection;
+        private bool testingMode;
 
         public event EventHandler<GenericArgs<Status>> OnStatus;
         public event EventHandler<GenericArgs<Offer>> OnOffer;
@@ -31,7 +32,8 @@ namespace GetOffers
         public event EventHandler OnCancelled;
         public event EventHandler OnDisconnected;
 
-        public OfferClient(string userName, string password, Connection connection)
+        public OfferClient(string userName, string password, 
+            Connection connection, bool testingMode)
         {
             if (string.IsNullOrWhiteSpace(userName))
                 throw new ArgumentNullException(nameof(userName));
@@ -45,6 +47,7 @@ namespace GetOffers
             this.userName = userName;
             this.password = password;
             this.connection = connection;
+            this.testingMode = testingMode;
         }
 
         public void Start() => Task.Factory.StartNew(() => DoWork());
@@ -84,7 +87,7 @@ namespace GetOffers
 
                 if (statusListener.WaitEvents() && statusListener.Connected)
                 {
-                    tableListener = new TableListener();
+                    tableListener = new TableListener(testingMode);
 
                     tableListener.OnOffer += (s, e) =>
                         OnOffer?.Invoke(this, new GenericArgs<Offer>(e.Item));

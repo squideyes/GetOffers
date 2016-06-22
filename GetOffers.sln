@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DLLs", "DLLs", "{D6D62E6E-9
 		ForexConnect\DLLs\pdas.dll = ForexConnect\DLLs\pdas.dll
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FxcmTrader.Library", "Source\FxcmTrader.Library\FxcmTrader.Library.csproj", "{1290DA6B-1424-476F-8329-0D15FEDC9B83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{49DE4865-5D2F-4E66-82AC-1BCB52608BA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49DE4865-5D2F-4E66-82AC-1BCB52608BA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49DE4865-5D2F-4E66-82AC-1BCB52608BA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1290DA6B-1424-476F-8329-0D15FEDC9B83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1290DA6B-1424-476F-8329-0D15FEDC9B83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1290DA6B-1424-476F-8329-0D15FEDC9B83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1290DA6B-1424-476F-8329-0D15FEDC9B83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

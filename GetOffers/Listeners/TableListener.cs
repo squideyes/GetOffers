@@ -15,9 +15,15 @@ namespace GetOffers
     {
         private HashSet<string> instruments = new HashSet<string>();
 
-        public event EventHandler<GenericArgs<Offer>> OnOffer;
+        private bool testingMode;
 
+        public event EventHandler<GenericArgs<Offer>> OnOffer;
         public event EventHandler<GenericArgs<Dictionary<string, string>>> OnOfferIds;
+
+        public TableListener(bool testingMode)
+        {
+            this.testingMode = testingMode;
+        }
 
         public void SetSymbols(List<Symbol> symbols) =>
             symbols.ForEach(s => instruments.Add(s.ToInstrument()));
@@ -86,12 +92,17 @@ namespace GetOffers
 
             if (row.isTimeValid && row.isBidValid && row.isAskValid)
             {
+                var tickOn = new DateTime(row.Time.Ticks, DateTimeKind.Utc).ToEstFromUtc();
+
+                if (!testingMode && tickOn.IsTickOn())
+                    return;
+
                 var symbol = row.Instrument.ToSymbol();
 
                 var offer = new Offer()
                 {
                     Symbol = symbol,
-                    TickOn = new DateTime(row.Time.Ticks, DateTimeKind.Utc).ToEstFromUtc(),
+                    TickOn = tickOn,
                     BidRate = row.Bid.ToRoundedRate(symbol),
                     AskRate = row.Ask.ToRoundedRate(symbol),
                 };
